@@ -1,8 +1,7 @@
 /* ═══════════════════════════════════════════════
-   Hadaria Wiki — Extra CSS  (v4)
+   Hadaria Wiki — Extra CSS  (v5)
    ═══════════════════════════════════════════════ */
 
-/* ── Variables ── */
 :root {
   --had-purple:       #322d50;
   --had-purple-light: #7c6fe0;
@@ -21,8 +20,6 @@
   --md-primary-fg-color:          #322d50;
   --md-primary-fg-color--light:   #4a4375;
   --md-primary-fg-color--dark:    #1e1a30;
-  --md-primary-bg-color:          #ffffff;
-  --md-primary-bg-color--light:   rgba(255,255,255,0.7);
   --md-accent-fg-color:           #7c6fe0;
   --md-typeset-a-color:           #5b4fc9;
   --md-default-bg-color:          #ffffff;
@@ -35,26 +32,29 @@
 
 /* ══════════════════════════════════════
    HEADER — violet foncé, sticky permanent
+   Tout scopé à .md-header pour éviter
+   de polluer les nav links
    ══════════════════════════════════════ */
 .md-header,
 [data-md-color-primary] .md-header {
   background-color: #322d50 !important;
-  transform: translateY(0) !important;   /* annule header.autohide */
+  transform: translateY(0) !important;
   position: sticky !important;
   top: 0 !important;
   z-index: 200;
   box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important;
 }
 
-.md-header__title,
-.md-header__topic,
-.md-ellipsis,
-.md-header__button,
-.md-header a {
+/* Blanc uniquement DANS le header */
+.md-header .md-header__title,
+.md-header .md-header__topic,
+.md-header .md-ellipsis,        /* scopé au header uniquement */
+.md-header .md-header__button,
+.md-header > .md-header__inner a {
   color: #ffffff !important;
 }
 
-.md-header__button svg,
+.md-header .md-header__button svg,
 .md-header .md-icon svg {
   fill: #ffffff !important;
 }
@@ -64,6 +64,7 @@
   border-radius: 4px;
 }
 
+/* Search */
 .md-search__input {
   background-color: rgba(255,255,255,0.13) !important;
   border: 1px solid rgba(255,255,255,0.20) !important;
@@ -97,37 +98,36 @@ body,
 }
 
 /* ══════════════════════════════════════
-   SIDEBAR GAUCHE — fond blanc, couleurs
-   Pas de touche au positionnement
+   SIDEBAR GAUCHE
    ══════════════════════════════════════ */
 .md-sidebar--primary {
   background: #ffffff;
   border-right: 1px solid var(--had-border);
 }
 
-/* Liens nav — style de base */
-.md-nav__link {
-  color: #4a4570;
+/* Reset complet des liens nav primaire */
+.md-sidebar--primary .md-nav__link {
+  color: #4a4570 !important;
   border-radius: 6px;
   transition: background var(--had-transition), color var(--had-transition);
   padding: 4px 10px;
   margin: 1px 0;
+  font-size: 0.85rem;
 }
 
-.md-nav__link:hover {
+.md-sidebar--primary .md-nav__link:hover {
   background: #f4f3fb;
-  color: #5b4fc9;
+  color: #5b4fc9 !important;
 }
 
-.md-nav__item--active > .md-nav__link,
-.md-nav__link--active {
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link--active {
   color: #5b4fc9 !important;
   font-weight: 600;
   background: rgba(91, 79, 201, 0.08);
 }
 
-/* Titres de section */
-.md-nav__title {
+.md-sidebar--primary .md-nav__title {
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -138,36 +138,46 @@ body,
 
 /* ══════════════════════════════════════
    TABLE OF CONTENTS (sidebar droite)
-   Positionnement géré par Material — couleurs seulement
+   Positionnement géré par Material
    ══════════════════════════════════════ */
 .md-sidebar--secondary {
   background: #ffffff;
   border-left: 1px solid var(--had-border);
 }
 
-.md-nav--secondary .md-nav__link {
-  font-size: 0.8rem;
-  color: #7a779a;
+.md-sidebar--secondary .md-nav__title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a779a !important;
+}
+
+/* Reset complet des liens TOC */
+.md-sidebar--secondary .md-nav__link {
+  color: #7a779a !important;
+  font-size: 0.8rem !important;
+  font-weight: normal !important;
   border-left: 2px solid transparent;
   border-radius: 0 4px 4px 0;
-  padding: 3px 12px;
-  transition: all var(--had-transition);
-  /* Annule les styles de la nav primaire qui pourraient déborder */
-  background: transparent !important;
-  font-weight: normal !important;
-  display: block !important;
+  padding: 3px 12px !important;
   margin: 0 !important;
+  background: transparent !important;
+  display: block;
+  transition: all var(--had-transition);
 }
 
-.md-nav--secondary .md-nav__link:hover {
+.md-sidebar--secondary .md-nav__link:hover {
   border-left-color: #7c6fe0;
-  color: #5b4fc9;
+  color: #5b4fc9 !important;
+  background: transparent !important;
 }
 
-.md-nav--secondary .md-nav__link--active {
+.md-sidebar--secondary .md-nav__link--active {
   border-left-color: #5b4fc9 !important;
   color: #5b4fc9 !important;
   font-weight: 600 !important;
+  background: transparent !important;
 }
 
 /* ══════════════════════════════════════
@@ -213,7 +223,7 @@ body,
 }
 
 /* ══════════════════════════════════════
-   TABLES — MUI DataGrid light
+   TABLES
    ══════════════════════════════════════ */
 .md-typeset table:not([class]) {
   border: 1px solid var(--had-border);
@@ -252,7 +262,7 @@ body,
 }
 
 /* ══════════════════════════════════════
-   ADMONITIONS — MUI Alert style
+   ADMONITIONS
    ══════════════════════════════════════ */
 .md-typeset .admonition,
 .md-typeset details {
@@ -333,8 +343,7 @@ body,
 }
 
 /* ══════════════════════════════════════
-   FOOTER — on laisse le fond natif de
-   Material, on ajuste juste les couleurs
+   FOOTER
    ══════════════════════════════════════ */
 .md-footer {
   background-color: #322d50;
@@ -357,7 +366,6 @@ body,
   color: rgba(255,255,255,0.5);
 }
 
-/* Social icons footer */
 .md-social__link svg {
   fill: rgba(255,255,255,0.6);
   transition: fill var(--had-transition);
