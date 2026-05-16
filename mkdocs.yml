@@ -19,7 +19,6 @@ theme:
     - navigation.sections
     - navigation.top
     - navigation.footer
-    - header.autohide
     - search.highlight
     - search.suggest
     - content.code.copy
