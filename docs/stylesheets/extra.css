@@ -12,8 +12,6 @@
   --had-surface:      #f9f8fd;
   --had-border:       rgba(50, 45, 80, 0.10);
   --had-shadow-sm:    0 1px 3px rgba(50,45,80,0.08), 0 1px 2px rgba(50,45,80,0.06);
-  --had-shadow-md:    0 4px 16px rgba(50,45,80,0.10);
-  --had-radius:       8px;
   --had-transition:   0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -26,71 +24,64 @@
   --md-primary-fg-color--dark:  #1e1a30;
   --md-accent-fg-color:         var(--had-purple-light);
   --md-typeset-a-color:         var(--had-accent);
-
   --md-default-bg-color:        var(--had-bg);
   --md-default-fg-color:        #1a1625;
   --md-default-fg-color--light: #4a4570;
   --md-default-fg-color--lighter: #7a779a;
-
   --md-code-bg-color:           #f4f3fb;
   --md-code-fg-color:           #322d50;
 }
 
 /* ══════════════════════════════════════
-   HEADER — transparent + sticky
+   HEADER — violet foncé, sticky permanent
+   transform:none neutralise le translateY
+   injecté par le feature header.autohide
    ══════════════════════════════════════ */
 .md-header {
-  position: sticky;
-  top: 0;
+  background-color: var(--had-purple) !important;
+  position: sticky !important;
+  top: 0 !important;
+  transform: translateY(0) !important;
   z-index: 200;
-  background: rgba(255, 255, 255, 0.85) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--had-border);
-  box-shadow: none;
-  color: var(--had-purple) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 2px 8px rgba(0,0,0,0.18);
   transition: box-shadow var(--had-transition);
 }
 
-/* Ombre légère quand on scrolle */
 .md-header[data-md-state="shadow"] {
-  box-shadow: var(--had-shadow-sm);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.22);
 }
 
-/* Titre et icônes en sombre */
 .md-header__title,
-.md-header__button,
-.md-header__topic {
-  color: var(--had-purple) !important;
+.md-header__topic,
+.md-header__button {
+  color: #fff !important;
 }
 
 .md-header__button.md-icon svg {
-  fill: var(--had-purple);
+  fill: #fff;
 }
 
-/* Logo */
 .md-header__button.md-logo img {
   height: 32px;
   border-radius: 4px;
 }
 
-/* Search input */
 .md-search__input {
-  background-color: var(--had-surface);
-  border: 1px solid var(--had-border);
-  border-radius: var(--had-radius);
-  color: var(--had-purple);
+  background-color: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  color: #fff;
 }
 .md-search__input::placeholder {
-  color: var(--md-default-fg-color--lighter);
+  color: rgba(255,255,255,0.55);
 }
 .md-search__input:focus {
-  border-color: var(--had-purple-light);
-  box-shadow: 0 0 0 3px rgba(124, 111, 224, 0.15);
+  background-color: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.35);
 }
 
 /* ══════════════════════════════════════
-   TABS (barre de nav principale) — masquée
+   TABS — masqués
    ══════════════════════════════════════ */
 .md-tabs {
   display: none !important;
@@ -106,21 +97,14 @@ body,
 }
 
 /* ══════════════════════════════════════
-   SIDEBAR GAUCHE — blanche, NON sticky
+   SIDEBAR GAUCHE — blanc, couleurs custom
+   On laisse Material gérer le positionnement
    ══════════════════════════════════════ */
 .md-sidebar--primary {
   background: var(--had-bg);
   border-right: 1px solid var(--had-border);
-  position: static !important;   /* annule le sticky du thème */
-  align-self: flex-start;
 }
 
-/* Retire l'ombre par défaut si présente */
-.md-sidebar--primary .md-sidebar__scrollwrap {
-  overflow: visible;
-}
-
-/* Navigation links */
 .md-nav__link {
   color: var(--md-default-fg-color--light);
   border-radius: 6px;
@@ -141,7 +125,6 @@ body,
   background: rgba(91, 79, 201, 0.08);
 }
 
-/* Titres de section nav */
 .md-nav__title {
   font-size: 0.7rem;
   font-weight: 700;
@@ -152,13 +135,11 @@ body,
 }
 
 /* ══════════════════════════════════════
-   TABLE OF CONTENTS (droite) — sticky
+   TABLE OF CONTENTS (droite)
+   On laisse Material gérer sticky + toc.follow
+   On surcharge uniquement les couleurs
    ══════════════════════════════════════ */
 .md-sidebar--secondary {
-  position: sticky !important;
-  top: 3.8rem;          /* hauteur du header */
-  max-height: calc(100vh - 4rem);
-  overflow-y: auto;
   background: var(--had-bg);
   border-left: 1px solid var(--had-border);
 }
@@ -170,19 +151,18 @@ body,
   border-radius: 0 4px 4px 0;
   padding: 3px 12px;
   transition: all var(--had-transition);
+  background: transparent !important;
 }
 
 .md-nav--secondary .md-nav__link:hover {
   border-left-color: var(--had-purple-light);
   color: var(--had-accent);
-  background: transparent;
 }
 
 .md-nav--secondary .md-nav__link--active {
   border-left-color: var(--had-accent) !important;
   color: var(--had-accent) !important;
   font-weight: 600;
-  background: transparent;
 }
 
 /* ══════════════════════════════════════
@@ -190,11 +170,9 @@ body,
    ══════════════════════════════════════ */
 .md-content {
   background: var(--had-bg);
-  max-width: 860px;
   padding: 2rem 2.5rem;
 }
 
-/* Titres */
 .md-typeset h1 {
   font-weight: 700;
   color: var(--had-purple);
@@ -217,7 +195,6 @@ body,
   font-size: 1.05rem;
 }
 
-/* Liens */
 .md-typeset a {
   color: var(--had-accent);
   text-decoration: none;
@@ -231,11 +208,11 @@ body,
 }
 
 /* ══════════════════════════════════════
-   TABLES — style MUI DataGrid light
+   TABLES — MUI DataGrid light
    ══════════════════════════════════════ */
 .md-typeset table:not([class]) {
   border: 1px solid var(--had-border);
-  border-radius: var(--had-radius);
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--had-shadow-sm);
   border-collapse: separate;
@@ -273,14 +250,13 @@ body,
    ══════════════════════════════════════ */
 .md-typeset .admonition,
 .md-typeset details {
-  border-radius: var(--had-radius);
+  border-radius: 8px;
   border-width: 1px;
   border-style: solid;
   box-shadow: none;
   font-size: 0.9rem;
 }
 
-/* Info / Note */
 .md-typeset .admonition.note,
 .md-typeset .admonition.info,
 .md-typeset details.note,
@@ -294,7 +270,6 @@ body,
   color: var(--had-accent);
 }
 
-/* Warning / Tip */
 .md-typeset .admonition.warning,
 .md-typeset details.warning {
   border-color: rgba(255, 152, 0, 0.35);
@@ -304,7 +279,6 @@ body,
   background-color: rgba(255, 152, 0, 0.10);
 }
 
-/* Danger */
 .md-typeset .admonition.danger,
 .md-typeset details.danger {
   border-color: rgba(229, 57, 53, 0.3);
@@ -315,7 +289,6 @@ body,
   color: #c62828;
 }
 
-/* Tip / Success */
 .md-typeset .admonition.tip,
 .md-typeset .admonition.success,
 .md-typeset details.tip,
@@ -342,7 +315,7 @@ body,
 }
 
 .md-typeset pre {
-  border-radius: var(--had-radius);
+  border-radius: 8px;
   border: 1px solid var(--had-border);
   box-shadow: var(--had-shadow-sm);
 }
@@ -354,7 +327,7 @@ body,
 }
 
 /* ══════════════════════════════════════
-   BOUTON "Jouer" — dernier item nav
+   BOUTON "Jouer" — dernier item sidebar
    ══════════════════════════════════════ */
 .md-nav--primary .md-nav__item:last-child .md-nav__link {
   display: inline-block;
@@ -365,7 +338,6 @@ body,
   font-weight: 700;
   font-size: 0.85rem;
   margin: 8px 0 8px 4px;
-  border-bottom: none;
   box-shadow: 0 2px 8px rgba(91, 79, 201, 0.3);
   transition: background var(--had-transition), box-shadow var(--had-transition), transform var(--had-transition);
 }
@@ -393,24 +365,12 @@ body,
   color: var(--had-accent) !important;
 }
 
-.md-footer__link:hover {
-  color: var(--had-purple) !important;
-}
-
 /* ══════════════════════════════════════
    SEARCH RESULTS
    ══════════════════════════════════════ */
 .md-search-result__meta {
   background-color: var(--had-surface);
   color: var(--md-default-fg-color--lighter);
-}
-
-.md-search-result__article {
-  border-radius: var(--had-radius);
-}
-
-.md-search-result__article:hover {
-  background: var(--had-surface);
 }
 
 .md-search-result mark {
@@ -420,15 +380,10 @@ body,
 }
 
 /* ══════════════════════════════════════
-   SCROLL BAR (optionnel, Webkit)
+   SCROLLBAR
    ══════════════════════════════════════ */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
   background: rgba(50, 45, 80, 0.18);
   border-radius: 3px;
