@@ -1,0 +1,62 @@
+site_name: Wiki Hadaria
+site_description: Règlement officiel du serveur Hadaria
+site_url: https://wiki.hadaria.fr
+
+theme:
+  name: material
+  language: fr
+  palette:
+    - scheme: slate
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/brightness-4
+        name: Passer en mode clair
+    - scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/brightness-7
+        name: Passer en mode sombre
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+  icon:
+    repo: fontawesome/brands/github
+
+repo_name: hadaria/wiki
+repo_url: https://github.com/hadaria/wiki
+
+nav:
+  - Accueil: index.md
+  - Règlements:
+    - Règlement général: reglement-general.md
+    - Règlement Évents PvP: reglement-events-pvp.md
+    - Règlement Farm: reglement-farm.md
+    - Règlement Pillage: reglement-pillage.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+plugins:
+  - search:
+      lang: fr
+
+extra:
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/hadaria
+      name: Discord Hadaria
