@@ -1,58 +1,102 @@
-:root,
-[data-md-color-scheme="slate"] {
+/* ── Couleurs globales ── */
+[data-md-color-scheme="default"] {
   --md-primary-fg-color:        #322d50;
   --md-primary-fg-color--light: #4a4375;
   --md-primary-fg-color--dark:  #1e1a30;
   --md-accent-fg-color:         #7c6fe0;
-  --md-default-bg-color:        #1a1726;
-  --md-default-bg-color--light: #221e35;
-  --md-default-bg-color--lighter: #2a2540;
-  --md-default-fg-color:        #e8e6f0;
-  --md-default-fg-color--light: #b0adc8;
-  --md-typeset-a-color:         #9b8ff0;
-  --md-admonition-fg-color:     #e8e6f0;
+  --md-typeset-a-color:         #5b4fc9;
 }
 
-/* Header */
+/* ── Header sticky façon hadaria.fr ── */
 .md-header {
-  background-color: #1e1a30;
-  border-bottom: 1px solid #322d50;
+  background-color: #322d50;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
 }
 
-/* Sidebar */
+.md-tabs {
+  background-color: #281e45;
+  border-bottom: 1px solid #3d3660;
+}
+
+/* ── Logo ── */
+.md-header__button.md-logo img {
+  height: 36px;
+}
+
+/* ── Bouton "Jouer" dans la navbar ── */
+.md-header__topic .md-header__title::after {
+  content: "";
+}
+
+/* Lien "Jouer" stylisé comme un bouton */
+.md-nav--primary .md-nav__item:last-child .md-nav__link,
+.md-tabs__item:last-child .md-tabs__link {
+  background: #7c6fe0;
+  color: #fff !important;
+  border-radius: 6px;
+  padding: 4px 14px;
+  font-weight: 700;
+  margin-left: 8px;
+  transition: background 0.2s;
+}
+
+.md-tabs__item:last-child .md-tabs__link:hover {
+  background: #5b4fc9 !important;
+}
+
+/* ── Contenu blanc ── */
+.md-main {
+  background-color: #f8f7fc;
+}
+
+.md-content {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(50,45,80,0.08);
+  padding: 1.5rem 2rem;
+  margin: 1.5rem auto;
+}
+
+/* ── Sidebar ── */
 .md-sidebar {
-  background-color: #1a1726;
+  background-color: #f8f7fc;
 }
 
-/* Nav active item */
 .md-nav__item--active > .md-nav__link {
-  color: #9b8ff0 !important;
+  color: #5b4fc9 !important;
   font-weight: 700;
 }
 
-/* Tables */
+/* ── Tables ── */
 .md-typeset table:not([class]) th {
   background-color: #322d50;
+  color: #fff;
 }
 
-/* Admonitions danger */
+.md-typeset table:not([class]) tr:hover {
+  background-color: #f0eeff;
+}
+
+/* ── Admonitions ── */
 .md-typeset .admonition.danger,
 .md-typeset details.danger {
-  border-color: #cf3d3d;
+  border-color: #e53935;
+  background-color: #fff5f5;
 }
 
-/* Admonitions info */
 .md-typeset .admonition.info,
 .md-typeset details.info {
   border-color: #7c6fe0;
+  background-color: #f5f3ff;
 }
 
-/* Footer */
+/* ── Footer ── */
 .md-footer {
-  background-color: #1e1a30;
+  background-color: #322d50;
 }
 
-/* Search bar */
-.md-search__form {
-  background-color: #2a2540;
-}
+/* ── Search ── */
+.md-searc
